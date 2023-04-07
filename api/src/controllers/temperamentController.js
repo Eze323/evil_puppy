@@ -9,7 +9,9 @@ const getAllTemperament=async ()=>{
                               .data;
     const arrayTemperaments=temperamentApiRaw.map((dog)=>{return dog.temperament})                              
     
-    return arrayTemperaments;
+    const arrayTempemodificado=arrayTemperaments.filter((elemento,indice)=>{return arrayTemperaments.indexOf(elemento===indice)});
+
+    return arrayTempemodificado;
 }
 
 module.exports={getAllTemperament};
