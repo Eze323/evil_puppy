@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const dogsRouter = require('./dogsRouter');
-const Temperament = require('../models/Temperament');
 const { getTemperamentHandler } = require('../handlers/temperamentHandler');
 
 // Importar todos los routers;
