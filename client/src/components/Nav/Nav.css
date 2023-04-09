@@ -1,0 +1,29 @@
+.ContentNav{
+    color: white;
+    background-color: #32cd3299;
+    padding: 10px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 5px 5px 15px 1px #000000;
+    width: 100%;
+}
+
+.Logo{
+        width: 210px;
+}
+.BotonLogout{
+font-family: 'rym-regular';
+color: white;
+padding: 5px;
+background-color: #a7d529ad;
+border-radius: 10px;
+width: 120px;
+-webkit-box-shadow: 5px 5px 15px 1px #000000; 
+box-shadow: 5px 5px 15px 1px #000000;
+cursor:pointer; 
+}
