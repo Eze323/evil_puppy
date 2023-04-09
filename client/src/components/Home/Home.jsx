@@ -2,7 +2,7 @@ import "./Home.css";
 function Home() {
     return (
       <div className="Home">
-        <h1>Landing Page</h1>
+        <h1>Home Page</h1>
         
       </div>
     );

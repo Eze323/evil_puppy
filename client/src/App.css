@@ -1,13 +1,11 @@
+
 .App {
   text-align: center;
-  background: url('../src/img/fondo.jpg');
-  transition: background-image 1s ease-in-out;
-  background-attachment: fixed;
-  background-size: cover;
-  margin: 0;
-  height: 100vh;
-   
- 
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  
 }
 
 .App-logo {
