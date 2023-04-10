@@ -5,7 +5,7 @@ export default function About() {
     return (<>
         <div className="ContentAbout">
             <h1>Ezequiel Irace</h1>
-            <h3>Aplicacion de Rick y Morty - M2 - Henry</h3>
+            <h3>Aplicacion de Dogs - Henry</h3>
             <p>Estamos en el año 3000. Fry, el protagonista de Futurama, ha encontrado los restos fosilizados de Seymour, el perro que tenía cuando vivía un milenio atrás. La idea de recuperar a su querida mascota le entusiasma. ¡Ahora puede hacerlo gracias a los increíbles avances de la tecnología! Sin embargo, a mitad de la operación, da marcha atrás. Acaba de enterarse de que su compañero vivió mucho tiempo después de que él se esfumara para aparecer en el futuro. Supone entonces que el animal tuvo que haberlo olvidado. Lo cierto es que el pobre Seymour esperó el resto de su vida, doce años, a que él regresara a su trabajo en una pizzería.</p>
             <p>
                 La escena tal vez parezca un extraño invento de los guionistas de la serie de Matt Groening, el creador de Los Simpson, pero se trata de un homenaje poco disimulado a un perro de la vida real. Era japonés y se llamaba Hachiko (1923-1935).
@@ -19,8 +19,8 @@ export default function About() {
             <p>
                 Pero el profesor murió el 21 de mayo de 1925, víctima de una hemorragia cerebral. Hachiko, a partir de ese momento, siguió acudiendo invariablemente a la estación, como si Ueno tuviera que llegar en cualquier momento. Iba a vivir allí, en Shibuya, el resto de su existencia. Admirados por su inquebrantable fidelidad, los viajeros que pasaban por allí se encargaron de alimentarlo y cuidarlo. Empezó a ser conocido por todos como “el perro fiel”.
             </p>
-            Imagen de Hachiko en sus últimos años
-            Imagen de Hachiko en sus últimos años Dominio público
+            <img src="https://www.lavanguardia.com/files/content_image_desktop_filter/uploads/2020/07/28/5f2002eab1cef.jpeg" alt='Imagen de Hachiko en sus últimos años' />
+            
             <p>
                 En homenaje a su constancia, en abril de 1934 se inauguró una estatua en su honor. El propio Hachiko se hallaba entre los asistentes a la ceremonia. En esos momentos ya lo habían convertido en una estrella. Al acto acudieron altos dignatarios, además de Kishi Kazutoshi, autor de un libro sobre su historia, y Sakano Hisako, sobrina del profesor Ueno.
             </p>

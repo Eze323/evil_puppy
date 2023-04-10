@@ -1,0 +1,70 @@
+.Figurita{
+margin-top: 15px;
+font-size: 10px;
+border:3px solid #03747e;
+position:relative;
+background-color:#01a6b980;
+padding: 5px;
+border-radius: 15px;
+-webkit-box-shadow: 5px 5px 15px 1px #9cc831; 
+box-shadow: 5px 5px 15px 1px #9cc831;
+-webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease-out;
+    transition:all 0.5s ease;
+}
+.Figurita:hover { -webkit-transform: rotate(-7deg);
+          -moz-transform: rotate(-7deg);
+         transform: rotate(-7deg);
+      }
+.Figurita button{
+   clear: both;
+    float: right;
+    margin: 6px;
+}
+
+.Figurita .name{ 
+   font-size: 13px;
+   align-items: center;
+    position: absolute;
+    background-color: rgba(0,0,0,0.5);
+    top: 62%;
+    left: 9%;
+    color: white;
+    padding: 5px;
+    min-height: 50px;
+    width: 79%;
+    height: min-content;
+    text-align: center;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    border-radius: 0px 0px 12px 12px;
+
+}
+.Figurita .specie{
+   overflow: overlay;
+    max-height: 34px;
+   float: left;
+    clear: both;
+    width: 100%;
+    font-size: 11px;
+}
+.Figurita .genero{
+   float:right;
+   width:30%;
+   font-size: 11px;
+}
+.Figurita .imageCard{
+   width:240px;
+   clear: both;
+   float: left;
+   margin: 20px;
+    border: 3px solid #03747e;
+    border-radius: 15px;
+}
+.BtnContainer{
+display: flex;
+justify-content: space-between;
+}
