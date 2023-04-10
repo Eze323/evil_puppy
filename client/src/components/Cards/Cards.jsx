@@ -1,32 +1,14 @@
 import Card from '../Card/Card';
-import styled from 'styled-components';
-
-export const ContieneFiguritas=styled.div`
-   padding-top: 15px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: space-around;
-    align-items: center;  
-
-
-`;
-export const ContieneTarjeta=styled.div`
-      margin-top: 15px;
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-content: center;
-      justify-content: center;
-      align-items: center;  
-`;
-
-
+const URL = 'https://api.thedogapi.com/v1/breeds/';
 
 export default function Cards(props) {
+
+    function cargaDogs(){
+
+            fetch(URL)
+            .then(response =>response.json())
+    }
+
    const { characters } = props;
    let i=0;
    
@@ -34,8 +16,8 @@ export default function Cards(props) {
       return <h1>No hay Personajes disponibles</h1>
    }else{
       return (
-         <ContieneTarjeta >   
-           <ContieneFiguritas>
+         <div className='ContieneTarjeta' >   
+           <div className='ContieneFiguritas'>
               
               {characters.map((character)=>(
                  <Card
@@ -53,8 +35,8 @@ export default function Cards(props) {
               )}
                    
         
-           </ContieneFiguritas>  
-         </ContieneTarjeta>
+           </div>  
+         </div>
            );
    }
    

@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
 import {useState,useEffect} from 'react';
-import {addFav,removeFav} from '../../redux/actions';
+import {addDog,deleteDog} from '../../redux/actions';
 import {useDispatch, useSelector } from 'react-redux';
 import './Card.css';
 
 export function Card(props) {
    const [isFav,setIsFav] = useState(false);
    const dispatch=useDispatch();
-   const myFavorites=useSelector(state=>state.myFavorites);
+   const myDogs=useSelector(state=>state.myDogs);
 
 
    useEffect(() => {
-      myFavorites?.forEach((fav) => {
+      myDogs?.forEach((fav) => {
          if (fav.id === props.id) {
             setIsFav(true);
          }
@@ -22,11 +22,11 @@ export function Card(props) {
    function handleFavorite(){
       if(isFav){
          setIsFav(false);
-         dispatch(removeFav(props.id));
+         dispatch(deleteDog(props.id));
 
       }else{
          setIsFav(true);
-         dispatch(addFav(props))}
+         dispatch(addDog(props))}
          
 
    }
