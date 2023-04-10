@@ -11,10 +11,10 @@ function LandingPage() {
   }
     return (
       <div className="LandingPage">
-        <h1>Bienvenido a Evil Puppy</h1>
+        <h1>Welcome to Evil Puppy</h1>
         
         <div class="middle">
-        <button className="btn btn1" onClick={handleHome}> Ingresar a la Home</button>
+        <button className="btn btn1" onClick={handleHome}>Enter Home</button>
         </div>
       </div>
     );

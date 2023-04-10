@@ -1,5 +1,6 @@
 import {Routes, Route, useNavigate, useLocation} from 'react-router-dom';
 import Home from './components/Home/Home.jsx';
+import About from './components/About/About.jsx';
 import Detail from './components/Detail/Detail.jsx';
 import LandingPage from './components/LandingPage/LandingPage';
 
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route exact path='/' element={<LandingPage/>} />
         <Route path='/home' element={<Home/>} />
+        <Route path='/about' element={<About/>} />
         <Route path='/detail/:id' element={<Detail/>} />
       </Routes>
 

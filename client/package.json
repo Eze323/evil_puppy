@@ -13,13 +13,16 @@
     "react-scripts": "5.0.1",
     "redux": "^4.2.5",
     "redux-thunk": "^2.4.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "less": "^3.12.2",
+    "less-watch-compiler": "^1.14.6"
   },
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "less":"less-watch-compiler less css/index.less"
   },
   "eslintConfig": {
     "extends": [
