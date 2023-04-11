@@ -6,6 +6,7 @@ import LandingPage from './components/LandingPage/LandingPage';
 
 import './App.css';
 import Nav from './components/Nav/Nav.jsx';
+import { useEffect, useState } from 'react';
 
 function App() {
 
@@ -13,13 +14,27 @@ function App() {
   const navigate =useNavigate();
   // eslint-disable-next-line
   const location = useLocation();
+  const [access, setAccess] = useState(false);
+  // eslint-disable-next-line
+  useEffect(() => {!access && navigate('/')},[access]);
+
+  function login() {
+       setAccess(true);
+       navigate('/home');
+ }
+ /*function logout(){
+   setAccess(false);
+   navigate('/');
+ }*/
+ 
 
   return (
     
     <div className="App">
+      
       {location.pathname!=='/'&& <Nav /*//onSearch={onSearch}*//>}
       <Routes>
-        <Route exact path='/' element={<LandingPage/>} />
+        <Route exact path='/' element={<LandingPage login={login}/>} />
         <Route path='/home' element={<Home/>} />
         <Route path='/about' element={<About/>} />
         <Route path='/detail/:id' element={<Detail/>} />

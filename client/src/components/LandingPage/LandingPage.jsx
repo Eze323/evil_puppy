@@ -3,10 +3,14 @@ import { useNavigate } from "react-router-dom";
 
 
 
-function LandingPage() {
-  // eslint-disable-next
+function LandingPage(props) {
+  const login = props.login;
+    // eslint-disable-next
   const navigate= useNavigate();
+
   function handleHome(){
+    login();
+    //setAccess(true);
     navigate("/home");
   }
     return (
