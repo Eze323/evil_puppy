@@ -1,7 +1,7 @@
 .LandingPage{
     background: url('../../img/fondo.jpg');
-    transition: background-image 1s ease-in-out;
-    /*background-attachment: fixed;*/
+    /*transition: background-image 1s ease-in-out;*/
+    background-attachment: fixed;
     background-size: cover;
     margin: 0;
     height: 100vh;
@@ -19,8 +19,6 @@
     font-family: 'Montserrat';
     font-size: 60px;
     text-shadow: 5px 5px 15px #ffffff;
- 
-
     
   }
  .middle{
