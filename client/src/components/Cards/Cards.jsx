@@ -1,14 +1,9 @@
 import Card from '../Card/Card';
-const URL = 'https://api.thedogapi.com/v1/breeds/';
+import './Cards.css';
+//const URL = 'https://api.thedogapi.com/v1/breeds/';
 
 export default function Cards(props) {
-// eslint-disable-next-line
-    function cargaDogs(){
-
-            fetch(URL)
-            .then(response =>response.json())
-    }
-
+  
    const { characters } = props;
    let i=0;
    
@@ -21,11 +16,11 @@ export default function Cards(props) {
               
               {characters.map((character)=>(
                  <Card
-                    onClose={props.onClose}
+                   // onClose={props.onClose}
                     key={i++}
                     name={character.name}
-                    species={character.species}
-                    gender={character.gender}
+                   // species={character.species}
+                    temperament={character.temperament}
                     image={character.image}
                     id={character.id}
                  />

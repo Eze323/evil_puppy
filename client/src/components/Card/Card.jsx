@@ -1,26 +1,27 @@
 import { Link } from 'react-router-dom';
 import {useState,useEffect} from 'react';
-import {addDog,deleteDog} from '../../redux/actions';
-import {useDispatch, useSelector } from 'react-redux';
+//import {addDog,deleteDog} from '../../redux/actions';
+//import {useDispatch, useSelector } from 'react-redux';
 import './Card.css';
 
 export function Card(props) {
-   const [isFav,setIsFav] = useState(false);
-   const dispatch=useDispatch();
-   const myDogs=useSelector(state=>state.myDogs);
-
+   //const [isFav,setIsFav] = useState(false);
+  // const dispatch=useDispatch();
+  // const myDogs=useSelector(state=>state.myDogs);
+  console.log(props);
 
    useEffect(() => {
-      myDogs?.forEach((fav) => {
+    /*  myDogs?.forEach((fav) => {
          if (fav.id === props.id) {
             setIsFav(true);
          }
-      });
+      );*/
       // eslint-disable-next-line
    }, [props]);
 
    function handleFavorite(){
-      if(isFav){
+      
+    /*  if(isFav){
          setIsFav(false);
          dispatch(deleteDog(props.id));
 
@@ -28,27 +29,29 @@ export function Card(props) {
          setIsFav(true);
          dispatch(addDog(props))}
          
-
+*/
    }
    
 
    return (
       <div className='Figurita'>
          <div className='BtnContainer'>
-         {
+         {/*
             isFav ? (
                <button onClick={handleFavorite}>❤️</button>
             ) : (
                <button onClick={handleFavorite}>🤍</button>
-            )
+            )*/
          }
          <button onClick={()=>props.onClose(props.id)}>X</button>
          </div>
-         <img className='imageCard'  src={props.image} alt={props.name}/> 
+         <div className='imageCard'>
+         <img src={props.image.url} width="250px" alt={props.name}/> 
+         </div>
          <Link to={`/detail/${props.id}`}>
-               <h2 className='name'>{props.name}</h2>
+               <h2 className='name'>{props.name} : 
+         {props.temperament}</h2>
          </Link>
-         <h2 className='specie'>{props.species} - {props.gender}</h2>
          
          
       </div>

@@ -14,10 +14,7 @@ export default function Detail() {
   const { detailId } = useParams();
   const [character, setCharacter] = useState({
       name:'',
-      status:'',
-      species:'',
-      gender:'',
-      origin:'',
+      temperament:'',
       image:''
 
   });
