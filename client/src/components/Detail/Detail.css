@@ -1,10 +1,9 @@
 .ContainerDetail{
-font-family:'rym-regular';
 margin-top: 30px;
 background-color:#01a6b980;
 width: 100%;
 color: white;
-text-shadow: 1px 1px 2px black;
+
 box-shadow: 5px 5px 15px 1px #000000;
 border-radius: 20px;
 display: flex;
@@ -30,7 +29,7 @@ flex-direction: column;
     overflow:hidden;
 }
 .ContainerImage .imageCard{
-   width:240px;
+   width:100%;
    clear: both;
    float: left;
    margin: 20px;

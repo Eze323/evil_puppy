@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 function Home() {
   const [dogBreeds, setDogBreeds] = useState([]);
 
-  async function fetchDogBreeds() {
+  async function fetchDogBreeds(props) {
     try {
       const response = await fetch(
         "https://api.thedogapi.com/v1/breeds?limit=20&page=0"

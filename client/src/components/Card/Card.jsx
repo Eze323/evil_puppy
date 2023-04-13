@@ -45,10 +45,11 @@ export function Card(props) {
          }
          <button onClick={()=>props.onClose(props.id)}>X</button>
          </div>
+         <Link to={`/detail/${props.id}`}>
          <div className='imageCard'>
          <img src={props.image.url} width="250px" alt={props.name}/> 
          </div>
-         <Link to={`/detail/${props.id}`}>
+         
                <h2 className='name'>{props.name} : 
          {props.temperament}</h2>
          </Link>
