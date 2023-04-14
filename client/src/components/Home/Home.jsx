@@ -1,10 +1,9 @@
-//import Cards from "../Cards/Cards";
 
+import React, { useState, useEffect } from "react";
 import Cards from "../Cards/Cards";
 import "./Home.css";
-import React, { useState, useEffect } from "react";
-
 function Home() {
+  
   const [dogBreeds, setDogBreeds] = useState([]);
 
   async function fetchDogBreeds(props) {

@@ -16,7 +16,7 @@ export default function Nav(props) {
             <div className="menu">
                 <li><Link to="/home">home</Link></li>
                 <li><Link to="/about">about</Link></li>
-                <li><Link to="/dogs">dogs</Link></li>
+                <li><Link to="/formcreate">Form</Link></li>
                 <li><Link to="#" onClick={()=>props.logout()} > logout </Link> </li>
             </div>
         </div>

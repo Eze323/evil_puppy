@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import {useState,useEffect} from 'react';
+import {useEffect} from 'react';
 //import {addDog,deleteDog} from '../../redux/actions';
 //import {useDispatch, useSelector } from 'react-redux';
 import './Card.css';
@@ -8,7 +8,7 @@ export function Card(props) {
    //const [isFav,setIsFav] = useState(false);
   // const dispatch=useDispatch();
   // const myDogs=useSelector(state=>state.myDogs);
-  console.log(props);
+  //console.log(props);
 
    useEffect(() => {
     /*  myDogs?.forEach((fav) => {
@@ -19,7 +19,7 @@ export function Card(props) {
       // eslint-disable-next-line
    }, [props]);
 
-   function handleFavorite(){
+   /*function handleFavorite(){
       
     /*  if(isFav){
          setIsFav(false);
@@ -29,8 +29,8 @@ export function Card(props) {
          setIsFav(true);
          dispatch(addDog(props))}
          
-*/
-   }
+
+   }*/
    
 
    return (

@@ -1,7 +1,8 @@
 import {Routes, Route, useNavigate, useLocation} from 'react-router-dom';
-import Home from './components/Home/Home.jsx';
-import About from './components/About/About.jsx';
-import Detail from './components/Detail/Detail.jsx';
+import Home from './components/Home/Home';
+import About from './components/About/About';
+import FormCreate from './components/FormCreate/FormCreate';
+import Detail from './components/Detail/Detail';
 import LandingPage from './components/LandingPage/LandingPage';
 
 import './App.css';
@@ -35,6 +36,7 @@ function App() {
       <Routes>
         <Route exact path='/' element={<LandingPage login={login}/>} />
         <Route path='/home' element={<Home/>} />
+        <Route path='/formcreate' element={<FormCreate/>}/>
         <Route path='/about' element={<About/>} />
         <Route path='/detail/:id' element={<Detail/>} />
         
