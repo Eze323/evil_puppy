@@ -34,7 +34,6 @@ export const getDogs=()=>{
       } catch (err) {
         console.log(err);
       }
-    };
 }
 
 export function getDogsByName(name){
