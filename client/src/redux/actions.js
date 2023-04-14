@@ -1,3 +1,4 @@
+import axios from 'axios';
 export const ADD_DOG='ADD_DOG';
 export const DELETE_DOG='DELETE_DOG';
 export const GET_DOGS='GET_DOGS';
@@ -21,11 +22,19 @@ export function deleteDog(id){
     }
 }
 
-export function getDogs(){
-    return{
-        type: GET_DOGS,
-        payload: true
-    }
+export const getDogs=()=>{
+    try {
+        return async function (dispatch) {
+          const response = await axios.get("http://localhost:3001/dogs");
+          return dispatch({
+            type: GET_DOGS,
+            payload: response.data,
+          });
+        };
+      } catch (err) {
+        console.log(err);
+      }
+    };
 }
 
 export function getDogsByName(name){
@@ -35,9 +44,17 @@ export function getDogsByName(name){
     }
 }
 
-export function get_temperaments(){
-    return{
-        type: GET_TEMPERAMENTS,
-        payload:true
+export const getTemperaments=()=>{
+    try {
+      return async function (dispatch) {
+        const response = await axios.get("http://localhost:3001/temperaments");
+        return dispatch({
+          type: GET_TEMPERAMENTS,
+          payload: response.data,
+        });
+      };
+    } catch (err) {
+      console.log(err);
     }
+    
 }
