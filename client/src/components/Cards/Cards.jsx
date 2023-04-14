@@ -8,7 +8,7 @@ export default function Cards(props) {
    let i=0;
    
    if(characters.length===0){
-      return <h1>No hay Personajes disponibles</h1>
+      return <h1>...no dogs available...</h1>
    }else{
       return (
          <div className='ContieneTarjeta' >   

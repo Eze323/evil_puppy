@@ -43,9 +43,10 @@ return (
   
   <div className="ContainerDetail">
     {console.log(dogBreeds,setDogBreeds)}
+     
     <div className="ContainerCharacteristics">
       <h2>Name: {dogBreeds.name}</h2>
-      <h5>bred for: {dogBreeds.bred_for}</h5> 
+      <h5 className="zoom">bred for: {dogBreeds.bred_for}</h5> 
       <h5>bred group: {dogBreeds.breed_group}</h5> 
       <h5>Temperaments: {dogBreeds.temperament}</h5> 
       <h5>Height: {dogBreeds.height.metric}</h5>  
@@ -57,7 +58,7 @@ return (
       <img className="imageCard" src={`https://cdn2.thedogapi.com/images/${dogBreeds.reference_image_id}.jpg`} alt={dogBreeds.name} />
     </div>
     <div>
-      <button onClick={handleBack}>Home</button>
+      <button className="btnClose btn btn1" onClick={handleBack}>Back Home</button>
     </div>
   </div>
 );

@@ -1,8 +1,9 @@
-import { ADD_DOG,DELETE_DOG,GET_DOGS,GET_DOGBYNAME,FILTER,ORDER } from "./actions";
+import { ADD_DOG,DELETE_DOG,GET_DOGS,GET_TEMPERAMENTS,GET_DOGBYNAME,FILTER,ORDER } from "./actions";
 
 const initialState={
     allDogs:[],
-    myDogs:[]
+    myDogs:[],
+    temperaments:[]
 }
 
 const rootReducer = (state = initialState, action)=>{
@@ -22,7 +23,12 @@ const rootReducer = (state = initialState, action)=>{
                 ...state,
                 myDogs:[...deleteDog],
                 allDogs:[...deleteDog]
-            }    
+            }
+        case GET_TEMPERAMENTS:
+            return{
+                ...state,
+
+            }       
         case FILTER:
             return {
                 ...state,

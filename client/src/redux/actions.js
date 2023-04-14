@@ -2,6 +2,7 @@ export const ADD_DOG='ADD_DOG';
 export const DELETE_DOG='DELETE_DOG';
 export const GET_DOGS='GET_DOGS';
 export const GET_DOGBYNAME='GET_DOGBYNAME';
+export const GET_TEMPERAMENTS='GET_TEMPERAMENTS';
 export const FILTER = 'FILTER';
 export const ORDER = 'ORDER';
 
@@ -31,5 +32,12 @@ export function getDogsByName(name){
     return{
         type: GET_DOGBYNAME,
         payload: name
+    }
+}
+
+export function get_temperaments(){
+    return{
+        type: GET_TEMPERAMENTS,
+        payload:true
     }
 }

@@ -16,9 +16,11 @@ box-shadow: 5px 5px 15px 1px #ffffff;*/
     transition: all 0.5s ease-out;
     transition:all 0.5s ease;
 }
-.Figurita:hover { -webkit-transform: rotate(-7deg);
-          -moz-transform: rotate(-7deg);
-         transform: rotate(-7deg);
+.Figurita:hover { 
+   /*-webkit-transform: rotate(-7deg);
+         -moz-transform: rotate(-7deg);
+         transform: rotate(-7deg);*/
+         box-shadow: 5px 5px 15px 1px #ffffff;
       }
 .Figurita button{
    clear: both;
