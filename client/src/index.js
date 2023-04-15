@@ -4,18 +4,18 @@ import './index.css';
 import App from './App';
 
  import { BrowserRouter } from 'react-router-dom';
-// import { Provider } from 'react-redux';
+ import { Provider } from 'react-redux';
 // // eslint-disable-next-line
-// import store from './redux/store';
+ import store from './redux/store';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <Provider store={store}>*/}
+     <Provider store={store}>
     <BrowserRouter> 
     <App />
      </BrowserRouter>
-{/*    </Provider> */}
+    </Provider> 
   </React.StrictMode>,
   document.getElementById('root')
 );

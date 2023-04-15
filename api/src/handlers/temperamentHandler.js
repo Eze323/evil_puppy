@@ -1,8 +1,8 @@
-const {getAllTemperament}= require('../controllers/temperamentController');
+const {getAllTemperaments}= require('../controllers/temperamentController');
 
 const getTemperamentHandler = async (req, res) => {
     
-    const result = await getAllTemperament();
+    const result = await getAllTemperaments();
 
     res.status(200).send(result);
 };

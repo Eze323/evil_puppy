@@ -1,28 +1,34 @@
+
 import { ADD_DOG,DELETE_DOG,GET_DOGS,GET_TEMPERAMENTS,GET_DOGBYNAME,FILTER,ORDER } from "./actions";
 
 const initialState={
-    allDogs:[],
+    dogBreeds:[],
     myDogs:[],
     temperaments:[]
 }
 
 const rootReducer = (state = initialState, action)=>{
     switch(action.type){
+        case GET_DOGS:
+            return {
+                ...state,
+                dogBreeds:[...action.payload]
+            }
         case ADD_DOG:
-            const addDog=[...state.allDogs,action.payload];
+            const addDog=[...state.dogBreeds,action.payload];
             return{
                 ...state,
-                allDogs:[...addDog],
+                dogBreeds:[...addDog],
                 myDogs:[...addDog]
             }
         case DELETE_DOG:
-            const deleteDog=state.allDogs.filter(
+            const deleteDog=state.dogBreeds.filter(
                 (dog)=>dog.id!==action.payload
             )
             return{
                 ...state,
                 myDogs:[...deleteDog],
-                allDogs:[...deleteDog]
+                dogBreeds:[...deleteDog]
             }
         case GET_TEMPERAMENTS:
             return{
@@ -32,7 +38,7 @@ const rootReducer = (state = initialState, action)=>{
         case FILTER:
             return {
                 ...state,
-                myDogs:state.allDogs.filter(e=>e.temperament===action.payload)
+                myDogs:state.dogBreeds.filter(e=>e.temperament===action.payload)
             }
         case ORDER:
             let orderDogs;
@@ -49,7 +55,7 @@ const rootReducer = (state = initialState, action)=>{
             case 'RESET':
                 return{
                     ...state,
-                    myDogs:state.allDogs
+                    myDogs:state.dogBreeds
                 }
             default:
                 return {...state}

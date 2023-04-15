@@ -2,9 +2,20 @@
 import React, { useState, useEffect } from "react";
 import Cards from "../Cards/Cards";
 import "./Home.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getDogs } from "../../redux/actions";
 function Home() {
-  
-  const [dogBreeds, setDogBreeds] = useState([]);
+  //const [dogBreeds, setDogBreeds] = useState([]);
+
+  const dogBreeds = useSelector((state) => state.dogBreeds);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getDogs());
+  }, [dispatch]);
+
+
+  /*
 
   async function fetchDogBreeds(props) {
     try {
@@ -20,14 +31,14 @@ function Home() {
 
   useEffect(() => {
     fetchDogBreeds();
-  }, []);
+  }, []);*/
 
   return (
     <div className="Home">
       <h1>Home Page</h1>
       <p>Estoy logueado y nos encontramos en la home</p>
      
-      <Cards characters={dogBreeds}/>
+      <Cards dogBreeds={dogBreeds}/>
       
     </div>
   );

@@ -1,30 +1,37 @@
 const axios = require('axios');
-const {Temperament} = require("../db");
-const URL = 'https://api.thedogapi.com/v1/breeds/';
+const { Temperament } = require("../db");
 
+const URL = 'https://api.thedogapi.com/v1/breeds';
 
+async function getAllTemperaments() {
+  const temperaments=await Temperament.findAll();
+  if(temperaments.length===0){
 
-const getAllTemperament = async () => {
-  const temperamentApiRaw = (
-    await axios.get(URL)
-  ).data;
+          try {
+            const response = await axios.get(URL);
+            const data = response.data;
 
-  const temperaments = temperamentApiRaw.reduce((acc, curr) => {
-    const currTemperaments = curr.temperament ? curr.temperament.split(', ') : [];
-    return acc.concat(currTemperaments);
-  }, []);
+            const allTemperaments = data.flatMap((breed) => {
+              const temperamentString = breed.temperament || '';
+              return temperamentString.split(',').map((temp) => temp.trim());
+            });
 
-  const uniqueTemperaments = [...new Set(temperaments)];
+            const uniqueTemperaments = [...new Set(allTemperaments)];
 
-  const createdTemperaments = await Promise.all(
-    uniqueTemperaments.map((name) =>
-      Temperament.create({ name })
-        .then((temperament) => temperament.toJSON())
-        .catch((err) => console.log(`Error al crear el temperamento ${name}: ${err}`))
-    )
-  );
+            const createdTemperaments = await Promise.all(uniqueTemperaments.map((name) =>
+              Temperament.create({ name })
+                .then((temperament) => temperament.toJSON())
+                .catch((err) => console.log(`Error al crear el temperamento ${name}: ${err}`))
+            ));
 
-  return createdTemperaments;
-};
+            return createdTemperaments;
+          } catch (error) {
+            console.log('Hubo un problema con la petición: ' + error.message);
+            return [];
+          }
+ }else{
+  return temperaments;
+ }
+}
 
-module.exports = { getAllTemperament };
+module.exports = { getAllTemperaments };

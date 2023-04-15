@@ -47,7 +47,7 @@ export function Card(props) {
          </div>
          <Link to={`/detail/${props.id}`}>
          <div className='imageCard'>
-         <img src={props.image.url} width="250px" alt={props.name}/> 
+         <img src={props.image} width="250px" alt={props.name}/> 
          </div>
          
                <h2 className='name'>{props.name} : 

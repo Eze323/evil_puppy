@@ -1,28 +1,27 @@
 import Card from '../Card/Card';
 import './Cards.css';
-//const URL = 'https://api.thedogapi.com/v1/breeds/';
 
 export default function Cards(props) {
   
-   const { characters } = props;
+   const { dogBreeds } = props;
    let i=0;
    
-   if(characters.length===0){
+   if(dogBreeds.length===0){
       return <h1>...no dogs available...</h1>
    }else{
       return (
          <div className='ContieneTarjeta' >   
            <div className='ContieneFiguritas'>
               
-              {characters.map((character)=>(
+              {dogBreeds.map((dog)=>(
                  <Card
                    // onClose={props.onClose}
                     key={i++}
-                    name={character.name}
-                   // species={character.species}
-                    temperament={character.temperament}
-                    image={character.image}
-                    id={character.id}
+                    name={dog.name}
+                   // species={dog.species}
+                    temperament={dog.temperament}
+                    image={dog.image}
+                    id={dog.id}
                  />
               )
               

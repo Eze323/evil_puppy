@@ -11,7 +11,7 @@ const cleanArray = (array) =>
             image:elemento.image.url,
             height:elemento.height.metric,
             weight:elemento.weight.metric,
-            lifeSpan:elemento.lifeSpan,
+            lifeSpan:elemento.life_span,
             temperament:elemento.temperament,
             created:false
 
@@ -30,20 +30,52 @@ const cleanArray = (array) =>
 
         }
     })
+    const cleanArray3 = (array) =>
+    array.map(elemento=>{
+        return {
+            id:elemento.id,
+            name:elemento.name,
+            height:elemento.height.metric,
+            weight:elemento.weight.metric,
+            image:elemento.image.reference_image_id,
+            lifeSpan:elemento.life_span,
+            temperament:elemento.temperament,
+            created:false
+
+        }
+    })
 
 const createDog= async (name,image,height,weight,lifeSpan,temperament)=>
- await Dog.create({name,image,height,weight,lifeSpan,temperament})
+ await Dog.create(
+    {
+        name,
+        image,
+        height,
+        weight,
+        lifeSpan,
+        temperament
+    }
+    
+    )
 
 
 const getDogByID = async (idRaza, source) => {
-    const dog =
+    let dog='';
+    
+        if(source === "API"){
+            let apiDogs=(await axios.get(`https://api.thedogapi.com/v1/breeds/`)).data;
+            
+            dog= cleanArray(apiDogs.filter(dogui=>dogui.id==idRaza));
+            //console.log(filterDogsApi);
+            //dog=cleanArray2(filterDogsApi);
+        }else{
+            dog=(await Dog.findByPk(idRaza));
 
-        source === "API"
-         ? (await axios.get(`https://api.thedogapi.com/v1/breeds/${idRaza}`)) 
-            .data
-         : (await Dog.findByPk(idRaza));
+        }
 
+console.log(dog)
     return dog;
+            
 }
 
 const searchDogByName= async (name) =>{
