@@ -10,12 +10,11 @@ import Nav from './components/Nav/Nav.jsx';
 import { useEffect, useState } from 'react';
 
 function App() {
-  
+  const navigate =useNavigate();
   const [access, setAccess] = useState(false);
   // eslint-disable-next-line
   useEffect(() => {!access && navigate('/')},[access]);
-  // eslint-disable-next-line
-  const navigate =useNavigate();
+  
   // eslint-disable-next-line
   const location = useLocation();
   

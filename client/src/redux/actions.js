@@ -35,10 +35,13 @@ export const getDogs=()=>{
 }
 
 export function getDogsByName(name){
-    return{
-        type: GET_DOGBYNAME,
-        payload: name
-    }
+  return async function (dispatch) {
+    const response = await axios.get("http://localhost:3001/dogs");
+    return dispatch({
+      type: GET_DOGBYNAME,
+      payload: response.data,
+    });
+  };
 }
 
 export const getTemperaments=()=>{

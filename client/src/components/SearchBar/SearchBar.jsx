@@ -1,6 +1,7 @@
 import { useState } from "react";
+import './SearchBar.css'
 
-export default function SearchBar({onSearch,random}) {
+export default function SearchBar({onSearch}) {
 
 
    const [character,setCharacter]=useState('');
@@ -10,7 +11,7 @@ export default function SearchBar({onSearch,random}) {
    }
 
    return (
-      <div>
+      <div className="ContentSearchBar">
          <input
                type='text'
                placeholder="Buscar Personaje ..."

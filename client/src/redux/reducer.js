@@ -30,6 +30,11 @@ const rootReducer = (state = initialState, action)=>{
                 myDogs:[...deleteDog],
                 dogBreeds:[...deleteDog]
             }
+        case GET_DOGBYNAME:
+            return {
+                ...state,
+                dogBreeds:[...action.payload]
+            }
         case GET_TEMPERAMENTS:
             return{
                 ...state,

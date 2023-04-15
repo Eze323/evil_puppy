@@ -35,7 +35,7 @@ export function Card(props) {
 
    return (
       <div className='Figurita'>
-         <div className='BtnContainer'>
+         {/* <div className='BtnContainer'> */}
          {/*
             isFav ? (
                <button onClick={handleFavorite}>❤️</button>
@@ -43,8 +43,8 @@ export function Card(props) {
                <button onClick={handleFavorite}>🤍</button>
             )*/
          }
-         <button onClick={()=>props.onClose(props.id)}>X</button>
-         </div>
+         {/* <button onClick={()=>props.onClose(props.id)}>X</button> */}
+         {/* </div> */}
          <Link to={`/detail/${props.id}`}>
          <div className='imageCard'>
          <img src={props.image} width="250px" alt={props.name}/> 
