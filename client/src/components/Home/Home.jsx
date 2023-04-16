@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Cards from "../Cards/Cards";
 import "./Home.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getDogs,getDogsByName} from "../../redux/actions";
+import { getDogs} from "../../redux/actions";
 import SearchBar from "../SearchBar/SearchBar";
 import { Paginado } from "../Paginado/Paginado";
 function Home() {
@@ -21,7 +21,8 @@ function Home() {
   const paginaInicio=(indexPage-1)*numPage;
   const paginaEnd=paginaInicio+numPage;
   const dogSlice=dogBreeds.slice(paginaInicio, paginaEnd);
-  
+
+
   useEffect(() => {
     dispatch(getDogs());
   }, [dispatch,indexPage]);

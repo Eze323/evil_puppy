@@ -23,20 +23,24 @@ export function deleteDog(id){
 }
 
 export const getDogs=()=>{
-    
+    //traigo todos los dogs de la base-api
         return async function (dispatch) {
-          const response = await axios.get("http://localhost:3001/dogs");
+          const apiData = await axios.get("http://localhost:3001/dogs");
+          
+          const dogs= apiData.data;
+
           return dispatch({
             type: GET_DOGS,
-            payload: response.data,
+            payload: dogs,
           });
         };
       
 }
 
 export function getDogsByName(name){
+  //busca todos los dogs por nombre
   return async function (dispatch) {
-    const response = await axios.get("http://localhost:3001/dogs");
+    const response = await axios.get(`http://localhost:3001/dogs?name=${name}`);
     return dispatch({
       type: GET_DOGBYNAME,
       payload: response.data,
