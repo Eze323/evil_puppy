@@ -17,31 +17,23 @@ export default function CreateForm(){
     temperaments:[]
   });
 
-  useEffect(() => {
-    async function fetchTemperaments() {
-      try {
-        const response = await axios.get('http://localhost:3001/temperament')
-       .then(res=>alert(res));
+  async function fetchTemperaments() {
+    try {
+      const response = (await axios.get('http://localhost:3001/temperament')).data;
       console.log(response);
-        // Obtener temperamentos de cada raza de perro
-        const breeds = Object.values(data);
-        const allTemperaments = breeds.flatMap(breed => breed.temperament ? breed.temperament.split(", ") : [])
-          .filter(temp => temp !== null)
-          .reduce((uniqueTemperaments, temp) => {
-            if (!uniqueTemperaments.includes(temp)) {
-              uniqueTemperaments.push(temp);
-            }
-            return uniqueTemperaments;
-          }, []);
-
-        setTemperaments(allTemperaments);
-      } catch (error) {
-        console.log('Hubo un problema con la petición Fetch: ' + error.message);
-      }
+      // Obtener temperamentos de cada raza de perro
+      //const breeds = Object.values(response);
+ 
+      setTemperaments(response);
+    } catch (error) {
+      console.log('Hubo un problema con la petición Fetch: ' + error.message);
     }
-
+  }
+  console.log(temperaments);
+  useEffect(() => {
     fetchTemperaments();
   }, []);
+  
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -183,7 +175,7 @@ export default function CreateForm(){
             {temperaments.map((temp, index) => (
                 <label key={index} className='temp'>
                    
-                {temp}<input type="checkbox" name={temp} checked={newDog.temperaments.includes(temp)} value={temp} onChange={handleTemperamentsChange} />
+                {temp.name}<input type="checkbox" name={temp.id} checked={newDog.temperaments.includes(temp.id)} value={temp.id} onChange={handleTemperamentsChange} />
                 
                 </label>
                 
