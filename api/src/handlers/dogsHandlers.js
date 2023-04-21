@@ -32,7 +32,7 @@ const createDogHandler = async (req, res) => {
         const { name, image, height, weight, lifeSpan, temperament } = req.body;
 
         const newDog = createDog(name, image, height, weight, lifeSpan, temperament);
-        res.status(201).send(newDog);
+        res.status(201).send("Creado exitosamente");
     } catch (error) {
         res.status(400).send({ error: error.message })
     }

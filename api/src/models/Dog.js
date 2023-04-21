@@ -20,11 +20,11 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     height:{
-      type: DataTypes.FLOAT,
+      type: DataTypes.STRING,
       allowNull: false,  
     },
     weight:{
-      type: DataTypes.FLOAT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     lifeSpan: {

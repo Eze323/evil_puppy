@@ -82,7 +82,6 @@ const getDogByID = async (idRaza, source) => {
 
         }
 
-console.log(dog)
     return dog;
             
 }

@@ -3,6 +3,7 @@ import "./SearchBar.css";
 import { useDispatch } from "react-redux";
 import { getDogsByName } from "../../redux/actions";
 import { useEffect } from "react";
+const URLimage='https://cdn2.thedogapi.com/images/';
 
 export default function SearchBar() {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ export default function SearchBar() {
     });
   };
 
-  useEffect(() => {}, [dispatch]);
+  useEffect(() => {}, [searchTerm]);
 
   return (
     <div className="ContentSearchBar">

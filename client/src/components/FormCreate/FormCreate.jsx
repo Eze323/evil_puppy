@@ -1,15 +1,28 @@
 import React, { useEffect, useState } from 'react';
+
 import './FormCreate.css';
+
+import axios from 'axios';
 export default function CreateForm(){
 
   const [temperaments, setTemperaments] = useState([]);
+  const [newDog, setNewDog] = useState({
+    name:'',
+    image:'',
+    minheight:'',
+    maxheight:'',
+    minweight:'',
+    maxweight:'',
+    lifeSpan:'',
+    temperaments:[]
+  });
 
   useEffect(() => {
     async function fetchTemperaments() {
       try {
-        const response = await fetch('https://api.thedogapi.com/v1/breeds/');
-        const data = await response.json();
-
+        const response = await axios.get('http://localhost:3001/temperament')
+       .then(res=>alert(res));
+      console.log(response);
         // Obtener temperamentos de cada raza de perro
         const breeds = Object.values(data);
         const allTemperaments = breeds.flatMap(breed => breed.temperament ? breed.temperament.split(", ") : [])
@@ -30,49 +43,62 @@ export default function CreateForm(){
     fetchTemperaments();
   }, []);
 
-  function handleInputChange2(event) {
-    // Handle input change here
-  }
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setNewDog({ ...newDog, [name]: value });
+  };
 
-    // async function getTemperaments() {
-    //     try {
-    //       const response = await fetch('https://api.thedogapi.com/v1/breeds/');
-    //       const data = await response.json();
-      
-    //       // Obtener temperamentos de cada raza de perro
-    //       const breeds = Object.values(data);
-    //       const temperaments = breeds.flatMap(breed => breed.temperament ? breed.temperament.split(", ") : [])
-    //         .filter(temp => temp !== null)
-    //         .reduce((uniqueTemperaments, temp) => {
-    //           if (!uniqueTemperaments.includes(temp)) {
-    //             uniqueTemperaments.push(temp);
-    //           }
-    //           return uniqueTemperaments;
-    //         }, []);
-      
-    //       console.log(temperaments); // Mostrar lista de temperamentos en la consola
-    //     } catch (error) {
-    //       console.log('Hubo un problema con la petición Fetch: ' + error.message);
-    //     }
-    //   }
-     //const temperamentos=getTemperaments();
-/*
-Nombre.
-Altura (diferenciar entre altura mínima y máxima de la raza).
-Peso (diferenciar entre peso mínimo y máximo de la raza).
-Años de vida.
-Posibilidad de seleccionar/agregar varios temperamentos en simultáneo.
-Botón para crear la nueva raza.
+  const handleTemperamentsChange = (event) => {
+    const temperament = event.target.name;
+    const checked = event.target.checked;
+  
+    if (checked) {
+      setNewDog((prevDog) => ({
+        ...prevDog,
+        temperaments: [...prevDog.temperaments, temperament],
+      }));
+    } else {
+      setNewDog((prevDog) => ({
+        ...prevDog,
+        temperaments: prevDog.temperaments.filter(
+          (temp) => temp !== temperament
+        ),
+      }));
+    }
+  };
 
-*/
-const handleInputChange=(evento)=>{
-    //[]: evento.target.value,
-    console.log(evento.target.value);
-}
-const handleSubmit=()=>{
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    //axios.post("http://localhost:3001/dogs",newDog)
+    axios.post("http://localhost:3001/dogs",{
+      "name":newDog.name,
+      "image":newDog.image,
+      "height": newDog.minheight+' - '+newDog.maxheight,
+      "weight":newDog.minweight+' - '+newDog.maxweight,
+      "lifeSpan":newDog.lifeSpan,
+      "temperament":newDog.temperaments
+    })
     
-    console.log("hace el perro");
-}
+    .then(res=>alert(res))
+    
+    // Aquí puedes enviar los datos del nuevo perro al servidor
+    // usando la función dispatch de Redux o cualquier otra forma
+    
+
+    // Reiniciar el estado para limpiar el formulario
+    setNewDog({
+      name:'',
+      image:'',
+    minheight:'',
+    maxheight:'',
+    minweight:'',
+    maxweight:'',
+    lifeSpan:'',
+    temperaments:[]
+    });
+  };
+  
+
 
     return(
         <div>
@@ -81,11 +107,22 @@ const handleSubmit=()=>{
         <div className='FormContent'>
             <form onSubmit={handleSubmit}>
             <div className='name'>
-            <label title='breedname'>breed name: </label>
+            <label title='name'>breed name: </label>
             <input 
             type="text" 
-            name='breedname' 
+            name='name' 
             placeholder='dog breed name'
+            value={newDog.name}
+            onChange={handleInputChange}
+            />
+            </div>
+            <div className='image'>
+            <label title='image'>breed image: </label>
+            <input 
+            type="text" 
+            name='image' 
+            placeholder='dog breed image'
+            value={newDog.image}
             onChange={handleInputChange}
             />
             </div>
@@ -96,6 +133,7 @@ const handleSubmit=()=>{
             type="number" 
             name='minheight' 
             placeholder='min height'
+            value={newDog.minheight}
             onChange={handleInputChange}
             />
             
@@ -104,6 +142,7 @@ const handleSubmit=()=>{
             type="number" 
             name='maxheight' 
             placeholder='max height'
+            value={newDog.maxheight}
             onChange={handleInputChange}
             />
             </div>
@@ -114,14 +153,16 @@ const handleSubmit=()=>{
             type="number" 
             name='minweight' 
             placeholder='min weight'
+            value={newDog.minweight}
             onChange={handleInputChange}
             />
             
              <label title='maxweight'>max: </label>
             <input 
             type="number" 
-            name='maxheight' 
+            name='maxweight' 
             placeholder='max height'
+            value={newDog.maxweight}
             onChange={handleInputChange}
             />
             </div>
@@ -129,37 +170,27 @@ const handleSubmit=()=>{
             <label title='lifespan'>life span: </label>
             <input 
             type="number" 
-            name='lifespan' 
+            name='lifeSpan' 
             placeholder='life span'
+            value={newDog.lifeSpan}
             onChange={handleInputChange}
             />
             </div>
             <div className='temperaments' >
             <label title='temperaments'>temperaments: </label><br/>
             <div className='classtemperaments'>
+      
             {temperaments.map((temp, index) => (
                 <label key={index} className='temp'>
-                
-                {temp}<input type="checkbox" name={temp} value={temp} onChange={handleInputChange2} />
+                   
+                {temp}<input type="checkbox" name={temp} checked={newDog.temperaments.includes(temp)} value={temp} onChange={handleTemperamentsChange} />
                 
                 </label>
                 
             ))}
+            
             </div>
-            {/* Assertive<input type="checkbox" name="cor" value="friendly"/><br/>
-            Energetic<input type="checkbox" name="cor" value="friendly"/><br/>
-            Loyal<input type="checkbox" name="cor" value="friendly"/><br/>
-            Gentle<input type="checkbox" name="cor" value="friendly"/><br/>
-            Independent<input type="checkbox" name="cor" value="friendly"/><br/>
-            Happy<input type="checkbox" name="cor" value="friendly"/><br/>
-            Confident: <input type="checkbox" name="cor" value="azul"/><br/>
-            Dominant: <input type="checkbox" name="cor" value="amarelo"/> <br/>
-            Friendly: <input type="checkbox" name="cor" value="vermelho"/> <br/>
-            Loving: <input type="checkbox" name="animal" value="coelho"/> <br/>
-            Protective: <input type="checkbox" name="animal" value="cachorro"/> <br/>
-            Trainable: <input type="checkbox" name="animal" value="gato"/><br/>
-            Dutiful:<input type="checkbox" name="animal" value="cachorro"/> <br/>
-            Responsible:<input type="checkbox" name="animal" value="cachorro"/> <br/> */}
+           
             </div>
 
 

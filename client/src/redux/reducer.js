@@ -4,7 +4,8 @@ import { ADD_DOG,DELETE_DOG,GET_DOGS,GET_TEMPERAMENTS,GET_DOGBYNAME,FILTER,ORDER
 const initialState={
     dogBreeds:[],
     myDogs:[],
-    temperaments:[]
+    temperaments:[],
+    loading:false
 }
 
 const rootReducer = (state = initialState, action)=>{

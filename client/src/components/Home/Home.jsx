@@ -6,9 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDogs} from "../../redux/actions";
 import SearchBar from "../SearchBar/SearchBar";
 import { Paginado } from "../Paginado/Paginado";
+import imgLoading from "../../img/pnghuella.png";
 function Home() {
   //const [dogBreeds, setDogBreeds] = useState([]);
-
+  const [isLoading,setLoading]= useState(true);
   const dogBreeds = useSelector((state) => state.dogBreeds);
   const dispatch = useDispatch();
   
@@ -24,8 +25,11 @@ function Home() {
 
 
   useEffect(() => {
-    dispatch(getDogs());
+    dispatch(getDogs()).then(()=>setLoading(false));
+
   }, [dispatch,indexPage]);
+
+
 
   return (
     <div className="Home">
@@ -34,7 +38,7 @@ function Home() {
       <SearchBar/>
      
       <Paginado paginado={setIndexPage} indexPage={indexPage}  />
-      <Cards dogBreeds={dogSlice}/>
+      {isLoading?(<p><img src={imgLoading} alt="Loading"/></p>):(<Cards dogBreeds={dogSlice}/>)}
     </div>
   );
 }
