@@ -35,16 +35,7 @@ export function Card(props) {
 
    return (
       <div className='Figurita'>
-         {/* <div className='BtnContainer'> */}
-         {/*
-            isFav ? (
-               <button onClick={handleFavorite}>❤️</button>
-            ) : (
-               <button onClick={handleFavorite}>🤍</button>
-            )*/
-         }
-         {/* <button onClick={()=>props.onClose(props.id)}>X</button> */}
-         {/* </div> */}
+         
          <Link to={`/detail/${props.id}`}>
          <div className='imageCard'>
          <img src={props.image} width="250px" alt={props.name}/> 
@@ -59,23 +50,3 @@ export function Card(props) {
    );
 }
 export default Card
-/*
-export const mapStateToProps = state => {
-   return {
-      myFavorites: state.myfavorites
-   }
-}
-export function mapDispatchToProps(dispatch) {
-   return{
-      addFav: function (personaje){
-         dispatch(addFav(personaje))
-      },
-      removeFav:function(id){
-         dispatch(removeFav(id))
-         
-      }
-
-   }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Card);
-*/

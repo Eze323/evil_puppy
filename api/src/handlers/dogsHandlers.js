@@ -16,7 +16,7 @@ const getDogHandler = async (req, res) => {
     //console.log("Estoy en dogs id");
     const { idRaza } = req.params;
     const source = isNaN(idRaza) ? "BDD" : "API"
-    //console.log(source);
+    console.log(source);
     try {
         const dog = await getDogByID(idRaza,source);
         res.status(200).send(dog);

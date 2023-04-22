@@ -1,5 +1,6 @@
 const axios = require('axios');
 const {Dog} = require("../db");
+const {Temperament}= require("../db");
 const {Op} = require("sequelize");
 const URL = 'https://api.thedogapi.com/v1/breeds/';
 
@@ -54,19 +55,41 @@ const cleanArray = (array) =>
 
 
     
-const createDog= async (name,image,height,weight,lifeSpan,temperament)=>
- await Dog.create(
-    {
-        name,
-        image,
-        height,
-        weight,
-        lifeSpan,
-        temperament
-    }
+// const createDog= async (name,image,height,weight,lifeSpan,temperament)=>
+//  await Dog.create(
+//     {
+//         name,
+//         image,
+//         height,
+//         weight,
+//         lifeSpan        
+//     },
     
-    )
 
+//     Dog.addTemperament(temperament)
+    
+//     )
+
+const createDog = async (name, image, height, weight, lifeSpan, temperament) => {
+    const dog = await Dog.create({
+      name,
+      image,
+      height,
+      weight,
+      lifeSpan,
+    });
+  
+    const temperaments = await Temperament.findAll({
+      where: {
+        id: temperament,
+      },
+    });
+  
+    await dog.addTemperaments(temperaments);
+  
+    return dog;
+  };
+  
 
 const getDogByID = async (idRaza, source) => {
     let dog='';
@@ -75,10 +98,16 @@ const getDogByID = async (idRaza, source) => {
             let apiDogs=(await axios.get(`https://api.thedogapi.com/v1/breeds/`)).data;
             
             dog= cleanArray(apiDogs.filter(dogui=>dogui.id==idRaza));
-            //console.log(filterDogsApi);
+            dog=dog[0];
             //dog=cleanArray2(filterDogsApi);
         }else{
-            dog=(await Dog.findByPk(idRaza));
+            //dog=(await Dog.findByPk(idRaza));
+            dog = await Dog.findByPk(idRaza, {
+                include: { 
+                  model: Temperament, 
+                  attributes: ['name']
+                } 
+              });
 
         }
 
