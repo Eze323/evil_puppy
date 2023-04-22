@@ -105,9 +105,16 @@ const getDogByID = async (idRaza, source) => {
             dog = await Dog.findByPk(idRaza, {
                 include: { 
                   model: Temperament, 
-                  attributes: ['name']
+                  attributes: ['name'], through: { attributes: [] }
                 } 
               });
+              const temperaments = dog.temperaments.map((temp) => temp.name);
+
+              // Eliminamos la propiedad "temperaments" del objeto dog
+              delete dog.dataValues.temperaments;
+          
+              // Agregamos la propiedad "temperament" con los nombres de los temperamentos
+              dog.dataValues.temperament = temperaments.join(', ');
 
         }
 
