@@ -10,6 +10,7 @@ export default function SearchBar() {
   
   const dispatch = useDispatch();
 
+  // eslint-disable-next-line
   const [dogBreeds, setDogBreeds] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
