@@ -1,6 +1,5 @@
 const axios = require('axios');
-const {Dog} = require("../db");
-const {Temperament}= require("../db");
+const {Dog,Temperament}= require("../db");
 const {Op} = require("sequelize");
 const URL = 'https://api.thedogapi.com/v1/breeds/';
 
@@ -52,24 +51,6 @@ const cleanArray = (array) =>
         }));
       };
       
-
-
-    
-// const createDog= async (name,image,height,weight,lifeSpan,temperament)=>
-//  await Dog.create(
-//     {
-//         name,
-//         image,
-//         height,
-//         weight,
-//         lifeSpan        
-//     },
-    
-
-//     Dog.addTemperament(temperament)
-    
-//     )
-
 const createDog = async (name, image, height, weight, lifeSpan, temperament) => {
     const dog = await Dog.create({
       name,
@@ -124,14 +105,33 @@ const getDogByID = async (idRaza, source) => {
 
 const searchDogByName= async (name) =>{
     //busca en la bdd
-            const databaseDogs = await Dog.findAll(
-                {
-                    where:
-                    {
-                        name:{[Op.like]:'%'+name+'%'}
-                    }
-                }
-            );
+            // Buscamos los perros que coincidan con el nombre
+            const dogs = await Dog.findAll({
+              where: {
+                name: { [Op.like]: `%${name}%` },
+              },
+              include: {
+                model: Temperament,
+                attributes: ['name'],
+                through: { attributes: [] },
+              },
+            });
+          
+            // Mapeamos los resultados para incluir los nombres de los temperamentos en cada perro
+            const dogsWithTemperaments = dogs.map((dog) => {
+              const temperaments = dog.temperaments.map((temp) => temp.name);
+              return {
+                id: dog.id,
+                name: dog.name,
+                height: dog.height,
+                weight: dog.weight,
+                image: dog.image,
+                lifeSpan: dog.lifeSpan,
+                temperament: temperaments.join(', '),
+                created: dog.created,
+              };
+            });
+    
     //busca en la api
      //buscar en api 
      
@@ -142,27 +142,38 @@ const searchDogByName= async (name) =>{
             
     const apiDogs=await cleanArray3(apiDogsRaw);
 
-    
-    //const apiDogs=cleanArray2(apiDogsRaw); 
-   // console.log(apiDogs); 
-    //filtra por nombre en el array traido de la api
-    //const filterDogsApi= apiDogs.filter((dogui)=>dogui.name==name)
 
-    return [...databaseDogs,...apiDogs];
+
+    return [...dogsWithTemperaments,...apiDogs];
 }
 
-const getAllDogs= async ()=>{
-    //buscar en bdd
-    const databaseDogs= await Dog.findAll();
-    //buscar en api 
-    const apiDogsRaw= (
-                    await axios.get(URL)
-                ).data;
-    const apiDogs=cleanArray(apiDogsRaw);                
-    //unir
-        return [...databaseDogs, ...apiDogs];
-    
+const getAllDogs = async () => {
+  // Buscar en base de datos
+  const databaseDogs = await Dog.findAll({
+    include: { 
+      model: Temperament, 
+      attributes: ['name'], 
+      through: { attributes: [] }
+    }
+  });
 
+  // Transformar los datos para incluir solo los nombres de los temperamentos
+  const transformedDatabaseDogs = databaseDogs.map((dog) => {
+    const temperaments = dog.temperaments.map((temp) => temp.name);
+    delete dog.dataValues.temperaments;
+    dog.dataValues.temperament = temperaments.join(', ');
+    return dog;
+  });
+
+  // Buscar en la API
+  const apiDogsRaw = (
+    await axios.get(URL)
+  ).data;
+  const apiDogs = cleanArray(apiDogsRaw);
+
+  // Unir los resultados
+  return [...transformedDatabaseDogs, ...apiDogs];
 }
+
 
 module.exports={createDog,getDogByID,getAllDogs,searchDogByName};
