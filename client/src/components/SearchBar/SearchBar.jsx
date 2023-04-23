@@ -3,9 +3,11 @@ import "./SearchBar.css";
 import { useDispatch } from "react-redux";
 import { getDogsByName } from "../../redux/actions";
 import { useEffect } from "react";
-const URLimage='https://cdn2.thedogapi.com/images/';
+//const URLimage='https://cdn2.thedogapi.com/images/';
 
 export default function SearchBar() {
+  const [isLoading,setLoading]= useState(false);
+  
   const dispatch = useDispatch();
 
   const [dogBreeds, setDogBreeds] = useState([]);
@@ -16,22 +18,27 @@ export default function SearchBar() {
   };
 
   const handleSearchButtonClick = () => {
-    dispatch(getDogsByName(searchTerm)).then((result) => {
-      setDogBreeds(result);
-      console.log(result);
-    });
+    setLoading(true);
+    dispatch(getDogsByName(searchTerm))
+      .then((result) => {
+        setDogBreeds(result);
+        console.log(result);
+      })
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => {}, [searchTerm]);
 
   return (
     <div className="ContentSearchBar">
-      <input
-        type="text"
-        placeholder="Buscar Personaje ..."
-        onChange={handleSearch}
-      />
-      <button onClick={handleSearchButtonClick}>Buscar</button>
-    </div>
+    <input
+      type="text"
+      placeholder="Search by name..."
+      onChange={handleSearch}
+    />
+    <button onClick={handleSearchButtonClick}>Search</button>
+    {isLoading && <div>Loading Dogs...</div>}
+    
+  </div>
   );
 }

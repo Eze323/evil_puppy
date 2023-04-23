@@ -27,7 +27,7 @@ function Home() {
   useEffect(() => {
     dispatch(getDogs()).then(()=>setLoading(false));
 
-  }, [dispatch,indexPage]);
+  }, [dispatch,indexPage,isLoading]);
 
 
 
