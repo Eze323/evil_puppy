@@ -13,7 +13,8 @@ const rootReducer = (state = initialState, action)=>{
         case GET_DOGS:
             return {
                 ...state,
-                dogBreeds:[...action.payload]
+                dogBreeds:[...action.payload],
+                myDogs:[...action.payload]
             }
         case ADD_DOG:
             const addDog=[...state.dogBreeds,action.payload];
@@ -39,29 +40,37 @@ const rootReducer = (state = initialState, action)=>{
         case GET_TEMPERAMENTS:
             return{
                 ...state,
-
+                temperaments:[...action.payload]
             }       
-        case FILTER:
-            return {
-                ...state,
-                myDogs:state.dogBreeds.filter(e=>e.temperament===action.payload)
-            }
+            case FILTER:
+                let filterDogs=[...state.myDogs];
+                return {
+                  ...state,
+                  dogBreeds: filterDogs.filter(e => e.temperament && e.temperament.includes(action.payload))
+                }
+              
+
         case ORDER:
-            let orderDogs;
-            if(action.payload==='Ascendente'){
-                orderDogs=state.myDogs.sort((a,b)=>a.name>b.name?1:-1);
+            let orderDogs=[...state.myDogs];
+            if(action.payload==='Race A-Z'){
+                orderDogs=state.dogBreeds.sort((a,b)=>a.name>b.name?1:-1);
             }
-            else{
-                orderDogs=state.myDogs.sort((a,b)=>a.name<b.name?1:-1);
+            else if(action.payload==='Race Z-A'){
+                orderDogs=state.dogBreeds.sort((a,b)=>a.name<b.name?1:-1);
+            }
+            else if(action.payload==='Weight A-Z'){
+                orderDogs=state.dogBreeds.sort((a,b)=>a.weight>b.weight?1:-1);
+            }else{
+                orderDogs=state.dogBreeds.sort((a,b)=>a.weight<b.weight?1:-1);
             }
             return{
                 ...state,
-                myDogs:[...orderDogs]
+                dogBreeds:[...orderDogs]
             }
             case 'RESET':
                 return{
                     ...state,
-                    myDogs:state.dogBreeds
+                    dogBreeds:state.myDogs
                 }
             default:
                 return {...state}

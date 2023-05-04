@@ -3,11 +3,18 @@ const { createDog,getDogByID,getAllDogs,searchDogByName } = require("../controll
 
 
 const getDogsHandler = async (req, res) => {
+    try {
     const { name } = req.query;
-
     const result = name ? await searchDogByName(name): await getAllDogs();
 
     res.status(200).send(result);
+    //? res.status(404).send("No se puede encontrar Dog");
+    
+   }catch (error) {
+   // console.log(error)
+    res.status(500).json(error.message);
+    
+  }
 };
 
 
@@ -29,15 +36,17 @@ const getDogHandler = async (req, res) => {
 const createDogHandler = async (req, res) => {
     //res.send(`Estoy por crear un perro con estos datos: ${name}- ${image}- ${height}- ${width} - ${lifeSpan} - ${temperament}`);
     try {
+        //validar que los datos 
         const { name, image, height, weight, lifeSpan, temperament } = req.body;
 
-        const newDog = createDog(name, image, height, weight, lifeSpan, temperament);
+        const newDog = createDog(name.toLowerCase(), image, height, weight, lifeSpan, temperament);
         res.status(201).send("Creado exitosamente");
     } catch (error) {
         res.status(400).send({ error: error.message })
     }
 
 }
+
 
 
 module.exports = { getDogsHandler, getDogHandler, createDogHandler };

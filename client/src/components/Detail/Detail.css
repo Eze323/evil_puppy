@@ -30,12 +30,12 @@ display: flex;
 }
 .ContainerCharacteristics h5:hover{
     font-size:25px; 
-    color: #161919;
+    color: #402901;
     transition: all 1s ease-out;
     transition:all 1s ease;
 }
 .ContainerImage{
-width: 50%;
+width: 80%;
 display: flex;
 flex-direction: column;
     flex-wrap: nowrap;

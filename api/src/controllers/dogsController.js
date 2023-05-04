@@ -1,8 +1,25 @@
 const axios = require('axios');
 const {Dog,Temperament}= require("../db");
 const {Op} = require("sequelize");
+const accessKey = process.env.ACCESS_TOKEN;
+const apikey = process.env.api_key;
 const URL = 'https://api.thedogapi.com/v1/breeds/';
 
+const config = {
+  headers: {
+    'Content-Type': 'application/json',
+    'x-api-key': `${accessKey}`,
+    'api_key':`${apikey}`
+  },
+};
+
+
+
+
+
+
+axios.defaults.baseURL= 'https://evilpuppyback-evil-puppy.up.railway.app/';
+//console.log(axios);
 const cleanArray = (array) =>
     array.map(elemento=>{
         return {
@@ -76,7 +93,7 @@ const getDogByID = async (idRaza, source) => {
     let dog='';
     
         if(source === "API"){
-            let apiDogs=(await axios.get(`https://api.thedogapi.com/v1/breeds/`)).data;
+            let apiDogs=(await axios.get(`https://api.thedogapi.com/v1/breeds/`,config)).data;
             
             dog= cleanArray(apiDogs.filter(dogui=>dogui.id==idRaza));
             dog=dog[0];
@@ -106,18 +123,24 @@ const getDogByID = async (idRaza, source) => {
 const searchDogByName= async (name) =>{
     //busca en la bdd
             // Buscamos los perros que coincidan con el nombre
+            console.log('llego a la funcionbuscar por nombre'+name);
             const dogs = await Dog.findAll({
               where: {
-                name: { [Op.like]: `%${name}%` },
+                name: {
+                  [Op.like]: `%${name.toLowerCase()}%`
+                },
               },
-              include: {
-                model: Temperament,
-                attributes: ['name'],
-                through: { attributes: [] },
-              },
+              include: [
+                {
+                  model: Temperament,
+                  attributes: ['name'],
+                  through: { attributes: [] },
+                },
+              ],
             });
-          
-            // Mapeamos los resultados para incluir los nombres de los temperamentos en cada perro
+            console.log(dogs);
+          //if(dogs.legnth>0){//si existen perros buscar sus temperamentos
+            // // Mapeamos los resultados para incluir los nombres de los temperamentos en cada perro
             const dogsWithTemperaments = dogs.map((dog) => {
               const temperaments = dog.temperaments.map((temp) => temp.name);
               return {
@@ -131,20 +154,22 @@ const searchDogByName= async (name) =>{
                 created: dog.created,
               };
             });
-    
+          //}
     //busca en la api
      //buscar en api 
-     
+  
+  
      const apiDogsRaw= (
-        await axios.get(`https://api.thedogapi.com/v1/breeds/search?q=${name}`)
+        await axios.get(`https://api.thedogapi.com/v1/breeds/search?q=${name}`,config)
     ).data;
+   
     //const apiDogsRaw=(await axios.get(`https://api.thedogapi.com/v1/breeds/`)).data;
             
     const apiDogs=await cleanArray3(apiDogsRaw);
-
-
-
-    return [...dogsWithTemperaments,...apiDogs];
+console.log(apiDogs);
+    
+            return [...dogsWithTemperaments,...apiDogs];
+   
 }
 
 const getAllDogs = async () => {
@@ -167,7 +192,7 @@ const getAllDogs = async () => {
 
   // Buscar en la API
   const apiDogsRaw = (
-    await axios.get(URL)
+    await axios.get(URL,config)
   ).data;
   const apiDogs = cleanArray(apiDogsRaw);
 

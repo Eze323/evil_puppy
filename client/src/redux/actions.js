@@ -25,7 +25,7 @@ export function deleteDog(id){
 export const getDogs=()=>{
     //traigo todos los dogs de la base-api
         return async function (dispatch) {
-          const apiData = await axios.get("http://localhost:3001/dogs");
+          const apiData = await axios.get(`/dogs`);
           
           const dogs= apiData.data;
 
@@ -40,7 +40,7 @@ export const getDogs=()=>{
 export function getDogsByName(name){
   //busca todos los dogs por nombre
   return async function (dispatch) {
-    const response = await axios.get(`http://localhost:3001/dogs?name=${name}`);
+    const response = await axios.get(`/dogs?name=${name}`);
     return dispatch({
       type: GET_DOGBYNAME,
       payload: response.data,
@@ -51,7 +51,7 @@ export function getDogsByName(name){
 export const getTemperaments=()=>{
     
       return async function (dispatch) {
-        const response = await axios.get("http://localhost:3001/temperaments");
+        const response = await axios.get('/temperament');
         return dispatch({
           type: GET_TEMPERAMENTS,
           payload: response.data,
@@ -59,4 +59,18 @@ export const getTemperaments=()=>{
       };
    
     
+}
+
+export const filterCards=(status)=>{
+  return {
+    type:FILTER,
+    payload:status
+  }
+}
+
+export const orderCards=(id)=>{
+  return{
+    type:ORDER,
+    payload:id
+  }
 }

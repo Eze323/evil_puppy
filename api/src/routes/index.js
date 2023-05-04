@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const dogsRouter = require('./dogsRouter');
 const { getTemperamentHandler } = require('../handlers/temperamentHandler');
+//const axios =require('axios');
+
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');

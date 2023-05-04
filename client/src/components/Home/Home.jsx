@@ -7,6 +7,7 @@ import { getDogs} from "../../redux/actions";
 import SearchBar from "../SearchBar/SearchBar";
 import { Paginado } from "../Paginado/Paginado";
 import imgLoading from "../../img/pnghuella.png";
+import FilterBar from "../FilterBar/FilterBar";
 function Home() {
   //const [dogBreeds, setDogBreeds] = useState([]);
   const [isLoading,setLoading]= useState(true);
@@ -15,7 +16,7 @@ function Home() {
   
   
   // eslint-disable-next-line
-  const [numPage, setNumPage] = useState(20);
+  const [numPage, setNumPage] = useState(8);
   // eslint-disable-next-line
   const [indexPage, setIndexPage] = useState(1);
   
@@ -34,8 +35,10 @@ function Home() {
   return (
     <div className="Home">
       <h1>Home Page</h1>
-      <p>Estoy logueado y nos encontramos en la home</p>
+      <span className="spanDescription">Welcome to our website about dog breeds. Here you will find detailed information about different breeds of dogs, including their characteristics</span>
+      
       <SearchBar/>
+      <FilterBar/>
      
       <Paginado paginado={setIndexPage} indexPage={indexPage}  />
       {isLoading?(<p><img src={imgLoading} alt="Loading"/></p>):(<Cards dogBreeds={dogSlice}/>)}
