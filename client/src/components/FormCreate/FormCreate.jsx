@@ -296,6 +296,14 @@ export default function CreateForm(){
             <button type="submit" value="Create">Create breed</button>
 
             </form>
+            <div className='dogPreviusly'>
+              <span className='namePreviusly'>{newDog.name}</span>
+              <span className='imagePreviusly'><img src={newDog.image} alt={newDog.name} width="80px" /></span>
+              <span className='heightPreviusly'>{newDog.height}</span>
+              <span className='weightPreviusly'>{newDog.weight}</span>
+              <span className='temperamentPreviusly'>{newDog.temperaments}</span>
+
+            </div>
 
         </div>
         </div>
