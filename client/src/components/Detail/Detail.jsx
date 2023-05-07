@@ -50,15 +50,15 @@ import axios from "axios";
           <p><img src={imgLoading} alt="Loading"/></p> // mensaje de carga mientras se espera la respuesta
         ) : (
           <>
+            <div className="ContainerImage">
+              <img className="imageCard" src={`${dogBreeds.image}`} alt={dogBreeds.name} />
+            </div>
             <div className="ContainerCharacteristics">
               <h2>Name: {dogBreeds.name}</h2>
               <span>Temperaments: {dogBreeds.temperament}</span>
               <span>Height: {dogBreeds.height}</span>
               <span>Weight: {dogBreeds.weight}</span>
               <span>Life span: {dogBreeds.lifeSpan}</span> 
-            </div>
-            <div className="ContainerImage">
-              <img className="imageCard" src={`${dogBreeds.image}`} alt={dogBreeds.name} />
             </div>
             <div>
               <button className="btnClose btn btn1" onClick={() => navigate("/home")}>Back Home</button>
