@@ -1,5 +1,5 @@
 
-import { ADD_DOG,DELETE_DOG,GET_DOGS,GET_TEMPERAMENTS,GET_DOGBYNAME,FILTER,ORDER } from "./actions";
+import { ADD_DOG,DELETE_DOG,GET_DOGS,GET_TEMPERAMENTS,GET_DOGSBYNAME,FILTER,ORDER } from "./actions";
 
 const initialState={
     dogBreeds:[],
@@ -32,8 +32,8 @@ const rootReducer = (state = initialState, action)=>{
                 myDogs:[...deleteDog],
                 dogBreeds:[...deleteDog]
             }
-        case GET_DOGBYNAME:
-            return {
+        case GET_DOGSBYNAME:
+        return {
                 ...state,
                 dogBreeds:[...action.payload]
             }

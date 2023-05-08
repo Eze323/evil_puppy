@@ -42,7 +42,7 @@ function Home() {
       <h1>Home</h1>
       <span className="spanDescription">Welcome to our website about dog breeds. Here you will find detailed information about different breeds of dogs, including their characteristics</span>
       
-     <button onClick={toggleSearchBar}>Mostrar/ocultar barra de búsqueda</button>
+     <button className="btnshowhide" onClick={toggleSearchBar}>Mostrar/ocultar barra de búsqueda</button>
       <div className="menusearchfilter">
      {showSearchBar && <SearchBar/>} 
       {showSearchBar && <FilterBar/>} 

@@ -23,7 +23,7 @@ export default function SearchBar() {
     dispatch(getDogsByName(searchTerm))
       .then((result) => {
         setDogBreeds(result);
-        console.log(result);
+        
       })
       .finally(() => setLoading(false));
   };
